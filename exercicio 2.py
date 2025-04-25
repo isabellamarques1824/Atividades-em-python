@@ -1,3 +1,5 @@
+#minha tentativa
+
 #nome
 nome = input('digite seu nome:')
 while len(nome) <=3 :
@@ -43,5 +45,41 @@ print(f'Nome:{nome}\n'
       f'Salario:{salario}\n'
       f'Genero:{genero}\n'
       f'Estado civil:{estado}')
+
+
+#correção
+
+#nome
+nome = input('Diga seu nome:')
+while len(nome) < 3:
+    nome = input('Diga seu nome:')
+
+#idade
+while True:
+    idade = input('Diga um número:')
+    if idade.isnumeric():
+        idade = int(idade)
+        if idade > 0 and idade < 150:
+            break
+
+#salario
+salario = input('Diga seu salário:')
+while not salario.isnumeric():
+    salario = input('Diga seu salario:')
+salario = int(salario)
+
+#sexo
+sexo = input('diga f ou m ')
+while sexo != 'f' and sexo != 'm':
+    sexo = input('diga f ou m:')
+
+#estado civil
+ecivil = input('diga s, c, v ou d:')
+while not(ecivil == 's' or ecivil == 'c' or ecivil == 'v' or ecivil == 'd'):
+    ecivil = input('diga f ou m:')
+
+#resultado
+
+print(nome, idade, salario, sexo, ecivil )
 
 

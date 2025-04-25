@@ -153,7 +153,7 @@ print(f'tem {pares} pares e {impares} impares.')
 i = 1
 fatorial = 1
 while i < 5:
-    i += 1
+   i += 1
    fatorial *= i
 print(fatorial)
 
@@ -163,8 +163,8 @@ fatorial = 1
 num = 5
 produto = f'{num}! = '
 while i < num:
-    produto += f'{i}*'
-    i += 1
+   produto += f'{i}*'
+   i += 1
    fatorial *= i
 produto += f'1 = {fatorial}'
 print(produto)

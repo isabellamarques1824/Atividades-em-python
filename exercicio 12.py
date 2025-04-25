@@ -1,3 +1,5 @@
+#minha tentativa
+
 notas = input('Quantas notas voce vai enviar para o sistema?')
 while not notas.isnumeric():
     notas = input('não é um número, tente novamente:')

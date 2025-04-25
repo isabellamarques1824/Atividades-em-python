@@ -1,3 +1,5 @@
+# minha tentativa
+
 n = input('digite um número:')
 while not n.isnumeric():
     n = input('Digite um NÚMERO:')
