@@ -1,15 +1,17 @@
-#nao fiz
 
-#correção
+#exercicio 8
 
 a = 1
 b = 1
-print(a,b,end='')
-i = 0
-
-while i < 10:
-    c  = a + b
-    print(c,end = '')
+i = 2
+n = input('quantos valores voce deseja ver:')
+while not n.isnumeric():
+    n = input('digite um valor válido:')
+n = int(n)
+print(a, b, end=' ')
+while i < n:
+    c = a + b
+    print(c, end=' ')
     a = b
     b = c
-    i += 1
+    i = i + 1
