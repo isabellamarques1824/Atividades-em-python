@@ -1,3 +1,10 @@
+import matplotlib.pyplot as plt
+
+def plotar_matriz(matriz):
+    plt.imshow(matriz, 'hot')
+    plt.colorbar()
+    plt.show()
+    return
 
 #Exercício 1 - printar matriz
 
@@ -59,6 +66,52 @@ acima_diagonal(matriz_acima_diagonal)
 printar_matriz(matriz_acima_diagonal)
 
 #Exercício 6 - Transposta
+
+def transposta(matriz):
+    for i in range(len(matriz)):
+        for j in range(i):
+            aux = matriz[i][j]
+            matriz[i][j] = matriz[j][i]
+            matriz[j][i] = aux
+    return
+
+matriz_transposta = criar_matriz(10,10)
+transposta(matriz_transposta)
+printar_matriz(matriz_transposta)
+
+
+#Exercício 8 - Xadrez
+
+def xadrez(matriz):
+    for i in range(len(matriz)):
+        for j in range(len(matriz[0])):
+            if i%2 == j%2:
+                matriz[i][j] = 1
+            else:
+                matriz[i][j] = 0
+    return
+
+matriz_xadrez = criar_matriz(8,8)
+xadrez(matriz_xadrez)
+printar_matriz(matriz_xadrez)
+plotar_matriz(matriz_xadrez)
+
+#Exercício 9 - Circulo
+
+def circulo(matriz):
+    raio = len(matriz)/2
+    for i in range(len(matriz)):
+        for j in range(len(matriz[0])):
+            if (i - raio) ** 2 + (j - raio) ** 2 <= raio ** 2:
+                matriz[i][j] = i
+            else:
+                matriz[i][j] = 0
+    return
+
+matriz_circulo = criar_matriz(1000,1000)
+circulo(matriz_circulo)
+plotar_matriz(matriz_circulo)
+
 
 
 
