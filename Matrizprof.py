@@ -105,15 +105,3 @@ def transpostaboa(matriz):
             matriz[i][j] = matriz[j][i]
             matriz[j][i] = aux
     return
-
-
-#mesma coisa para exercicio 1 e 2, so mudar  o valor de lista.append
-
-martiz_geral = cria_matriz(10, 10)
-plotar_matriz(martiz_geral)
-
-# diagonal
-
-matriz_com_diagonal = cria_matriz(10,10)
-diagonal_boa(matriz_com_diagonal)
-plotar_matriz(matriz_com_diagonal)
