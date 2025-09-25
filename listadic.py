@@ -25,8 +25,6 @@ def indicemenor(lista):
             indicemenor = i
     return indicemenor
 
-'''
-
 # Exercício 1
 
 saudacoes = {"oi": "hello", "tchau": "tchau"}
@@ -113,7 +111,6 @@ numeros = {
 
 frase = 'EU TENhO AULA  na sala cinco zero dois '
 
-'''
 
 #desisti de completar dps eu arrumo bonitinho
 
