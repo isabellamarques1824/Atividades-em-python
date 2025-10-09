@@ -1,5 +1,7 @@
 import pandas as pd
 import requests
+from numba import typeof
+
 acougue = {
     'carne': ['patinho', 'coxão mole', 'fraldinha', 'maminha', 'picanha', 'linguiça'],
     'R$/kg': [35.90,49.90,39.90,80.00,45,90.15],
@@ -15,6 +17,15 @@ def forca_opcao(msg, lista_opcoes):
         opcao = input(f"{msg}\n{opcoes}\n->")
     return opcao
 
+#essa parte tá incompleta/ com algum erro
+def printa_dic(dic,num=0):
+    for key in dic.keys():
+        if type(dic[key]) is dict:
+            print(key)
+            printa_dic(dic[key],num+1)
+        else:
+            print(f'{num*''}')
+
 def verificanum(msg):
     num = input(msg)
     while not num.isnumeric():
@@ -28,7 +39,18 @@ def cria_indice():
 def cadastrar():
     global indices
     for key in acougue.keys():
-        info = input(f"Diga o novo {key}:")
+        if key == 'R$/kg':
+            while True:
+                try:
+                    info = float(input(f"Diga o novo {key}: "))
+                except ValueError:
+                    print('Valor inválido. Precisa ser float: a virgula é ponto - 1,5 -> 1.5')
+                else:
+                    break
+        elif key == 'estoque':
+            info = verificanum(f'Diga o novo {key}: ')
+        else:
+            info = input(f"Diga o novo {key}: ")
         acougue[key].append(info)
     indices = cria_indice()
     return
@@ -72,7 +94,21 @@ def comprar():
         print(f'Só há {acougue['estoque'][indice_item]} kg no estoque! ')
     return
 
-print(pd.DataFrame(acougue))
+def confirmar_compra():
+    print('Essas são as informações da sua compra: ')
+    printa_dic(carrinho)
+    alterar = forca_opcao('Deseja remover algum item?', ['s','n'])
+    if alterar == 's':
+        item = forca_opcao('qual item vc vai remover? ', carrinho['itens'].keys())
+        indice = indices[item]
+        qnt = verificanum(f'quantos kg de {item} serão removidos?')
+        if qnt <= carrinho['itens'][item]:
+            carrinho['itens'][item] -= qnt
+            carrinho['valor total'] -= qnt*acougue['R$/kg'][indice]
+        else:
+            print(f'não é possivel remover esse tanto pois só há {carrinho['itens'][item]}kg')
+        confirmar_compra()
+    return
 indices = cria_indice()
 
 carrinho = {
@@ -97,24 +133,30 @@ def cadastro_endereco():
             print('cep inválido!')
     return
 
+
+acoes  = {
+    'cadastrar': cadastrar,
+    'remover': remover,
+    'atualizar': atualizar,
+    'sair': exit
+}
+
+print('BEM VINDO AP AÇOUGUE AGNELLO! 👌👌👌👌😘💕🍖🍖')
+usuario = forca_opcao('você é cliente ou funcionário?', ['cliente', 'funcionário'])
+if usuario == 'cliente':
+    cadastro_endereco()
+
 while True:
-    print('BEM VINDO AP AÇOUGUE AGNELLO! 👌👌👌👌😘💕🍖🍖')
-    usuario = forca_opcao('você é cliente ou funcionário?', ['cliente', 'funcionário'])
     if usuario == 'funcionário':
-        operacao = forca_opcao('Digite um setor: ', ['cadastrar', 'remover', 'atualizar'])
-        if operacao =='cadastrar':
-            cadastrar()
-        elif operacao == 'remover':
-            remover()
-        else:
-            atualizar()
-        continuar = forca_opcao('você deseja realizar outra operação?', ['sim', 'não'])
-        if continuar == 'não':
-            break
+        operacao = forca_opcao('Digite um setor: ', acoes.keys())
+        acoes[operacao]()
     else:
         while True:
             comprar()
             encerrar = forca_opcao('Encerrar a comprar ou ver mais itens?', ['encerrar', 'continuar'])
             if encerrar == 'encerrar':
-                print(carrinho)
+                printa_dic(carrinho)
                 break
+
+
+# esse código não está completo
