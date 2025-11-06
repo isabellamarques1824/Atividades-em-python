@@ -40,4 +40,15 @@ def acha_raiz(n):
         print(chute)
 
 
-acha_raiz(25)
+def bubble_sort(lista):
+    for i in range(len(lista)):
+        trocas = 0
+        for j in range(len(lista) - i - 1):
+            if lista[j] > lista[j+1]:
+                aux = lista[j]
+                lista[j] = lista[j+1]
+                lista[j+1] = aux
+                trocas += 1
+        if trocas == 0:
+            break
+    return
